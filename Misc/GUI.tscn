@@ -1,0 +1,1682 @@
+[gd_scene load_steps=66 format=2]
+
+[ext_resource path="res://Misc/HealthUI.gd" type="Script" id=1]
+[ext_resource path="res://Misc/UI elements/BarEnd2.png" type="Texture" id=2]
+[ext_resource path="res://Misc/UI elements/healthfill.png" type="Texture" id=3]
+[ext_resource path="res://Misc/UI elements/Orb.png" type="Texture" id=4]
+[ext_resource path="res://Misc/UI elements/livingfill.png" type="Texture" id=5]
+[ext_resource path="res://Misc/LivingUI.gd" type="Script" id=6]
+[ext_resource path="res://Misc/StaminaUI.gd" type="Script" id=7]
+[ext_resource path="res://Misc/UI elements/staminafill.png" type="Texture" id=8]
+[ext_resource path="res://Misc/UI elements/orb2.png" type="Texture" id=9]
+[ext_resource path="res://Misc/UI elements/healthcontour2.png" type="Texture" id=12]
+[ext_resource path="res://Misc/GUI.gd" type="Script" id=13]
+[ext_resource path="res://Misc/UI elements/Frame1.png" type="Texture" id=14]
+[ext_resource path="res://Entities/Hemwick/Bows/Arrows/SimpleArrow.png" type="Texture" id=15]
+[ext_resource path="res://Misc/UI elements/barbackground.png" type="Texture" id=16]
+[ext_resource path="res://Misc/ArrowsUI.gd" type="Script" id=17]
+[ext_resource path="res://Misc/UI elements/WeaponIcons/Dagger.png" type="Texture" id=18]
+[ext_resource path="res://Misc/UI elements/UI Icons/HealthStat.png" type="Texture" id=19]
+[ext_resource path="res://Misc/UI elements/UI Icons/ArmorStat.png" type="Texture" id=20]
+[ext_resource path="res://Misc/ArmorStatUI.gd" type="Script" id=21]
+[ext_resource path="res://Misc/UI elements/UI Icons/ArmorEmpty.png" type="Texture" id=22]
+[ext_resource path="res://Misc/StrengthUI.gd" type="Script" id=23]
+[ext_resource path="res://Misc/ManaUI.gd" type="Script" id=24]
+[ext_resource path="res://Misc/UI elements/Orb3.png" type="Texture" id=25]
+[ext_resource path="res://Misc/UI elements/UI Icons/fist.png" type="Texture" id=26]
+[ext_resource path="res://Misc/UI elements/UI Icons/ManaStat.png" type="Texture" id=27]
+[ext_resource path="res://Misc/UI elements/UI Icons/StaminaStat.png" type="Texture" id=28]
+[ext_resource path="res://Misc/UI elements/UI Icons/LivingStat.png" type="Texture" id=29]
+[ext_resource path="res://Misc/UI elements/manafill.png" type="Texture" id=30]
+[ext_resource path="res://Misc/CoinNumber.gd" type="Script" id=31]
+[ext_resource path="res://Sounds/UI/BarsAnimation.mp3" type="AudioStream" id=32]
+[ext_resource path="res://Shaders/Highlight.gdshader" type="Shader" id=33]
+[ext_resource path="res://Fonts/OptionFont.tres" type="DynamicFont" id=34]
+[ext_resource path="res://Sounds/UI/BarsAnimation2.mp3" type="AudioStream" id=35]
+
+[sub_resource type="ShaderMaterial" id=911]
+shader = ExtResource( 33 )
+shader_param/highlight_color = Color( 1, 1, 1, 1 )
+shader_param/frequency = 0.35
+shader_param/highlight_speed = 6.0
+shader_param/highlight_width = 15.0
+
+[sub_resource type="DynamicFontData" id=601]
+font_path = "res://Fonts/alagard.ttf"
+
+[sub_resource type="DynamicFont" id=602]
+size = 72
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 601 )
+
+[sub_resource type="Theme" id=914]
+default_font = SubResource( 602 )
+
+[sub_resource type="DynamicFontData" id=1236]
+font_path = "res://Fonts/JenrivTitlingRegular-x3RKV.otf"
+
+[sub_resource type="DynamicFont" id=1235]
+size = 120
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 1236 )
+
+[sub_resource type="Theme" id=1237]
+default_font = SubResource( 1235 )
+
+[sub_resource type="Animation" id=916]
+resource_name = "Hidden"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ArrowFirst:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, 90 ), Vector2( 0, 80 ) ]
+}
+
+[sub_resource type="Animation" id=915]
+resource_name = "Visible"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ArrowFirst:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 80 ), Vector2( 0, 90 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=913]
+resource_name = "None"
+length = 999999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapons/Weapon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Weapons/Weapon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=599]
+resource_name = "Weapon"
+length = 999999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapons/Weapon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Weapons/Weapon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Theme" id=603]
+default_font = SubResource( 602 )
+
+[sub_resource type="Animation" id=912]
+resource_name = "None"
+length = 999999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapons/Weapon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Weapons/Weapon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=910]
+resource_name = "Weapon"
+length = 999999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapons/Weapon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Weapons/Weapon:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Theme" id=79]
+default_font = ExtResource( 34 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 1, 0.960784, 0, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Theme" id=78]
+default_font = ExtResource( 34 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Animation" id=81]
+resource_name = "ChangeToPrimary"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("FramePrimary:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FramePrimary:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 20.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FramePrimary:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 246.861, 1027.87 ), Vector2( 111.825, 979.94 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FrameSecondary:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111.825, 979.94 ), Vector2( 246.861, 1027.87 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FrameSecondary:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("FrameSecondary:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.6, 0.6 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("FramePrimary:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FrameSecondary:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "ChangeToSecondary"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("FramePrimary:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.6, 0.6 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FramePrimary:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FramePrimary:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 111.825, 979.94 ), Vector2( 246.861, 1027.87 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("FrameSecondary:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 246.861, 1027.87 ), Vector2( 111.825, 979.94 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("FrameSecondary:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 20.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("FrameSecondary:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 0.6 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("FramePrimary:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FrameSecondary:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=587]
+resource_name = "Dread"
+length = 9999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dread:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.0392157 ) ]
+}
+
+[sub_resource type="Animation" id=588]
+resource_name = "DreadOff"
+length = 9999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dread:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=589]
+length = 0.001
+
+[sub_resource type="Animation" id=590]
+resource_name = "Fire"
+length = 9999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fire:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.0392157 ) ]
+}
+
+[sub_resource type="Animation" id=591]
+resource_name = "FireOff"
+length = 9999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Fire:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=592]
+length = 0.001
+
+[sub_resource type="DynamicFontData" id=905]
+font_path = "res://Fonts/alagard.ttf"
+
+[sub_resource type="DynamicFont" id=594]
+size = 128
+outline_size = 6
+outline_color = Color( 0.196078, 0, 0, 1 )
+font_data = SubResource( 905 )
+
+[sub_resource type="Theme" id=86]
+default_font = SubResource( 594 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 0.980392, 0.180392, 0.0784314, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Theme" id=595]
+default_font = SubResource( 594 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Theme" id=586]
+default_font = ExtResource( 34 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 0.290196, 0, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Theme" id=596]
+default_font = ExtResource( 34 )
+Button/colors/font_color = Color( 1, 0.937255, 0, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Animation" id=1240]
+resource_name = "Off"
+length = 1e+09
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthUI:rect_rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 89.9999, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HealthUI:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 89.722, 146.129 ), Vector2( 89.722, 99.1168 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StaminaUI:rect_rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 89.9999, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StaminaUI:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 121.428, 154.399 ), Vector2( 95.633, 133.353 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ManaUI:rect_rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 89.9999, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ManaUI:rect_position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 151.699, 159.396 ), Vector2( 95.633, 167.814 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ManaUI/ManaStat:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -89.9999, 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ManaUI/ManaStat:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 92.5911, 49.8484 ), Vector2( 102.995, 45.0779 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("StaminaUI/StaminaStat:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 101.714, 49.7112 ), Vector2( 101.714, 49.7112 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("StaminaUI/StaminaStat:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -89.9999, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("HealthUI/HealthStat:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 112.606, 48.9891 ), Vector2( 114.08, 42.2504 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("HealthUI/HealthStat:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -89.9999, 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Orbs:rotation_degrees")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 89.9999, 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Orbs:position")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 79.7093, 156.794 ), Vector2( 79.7093, 156.794 ) ]
+}
+tracks/14/type = "audio"
+tracks/14/path = NodePath("Sounds/BarAnim")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 35 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=1239]
+resource_name = "On"
+length = 1e+09
+tracks/0/type = "value"
+tracks/0/path = NodePath("HealthUI:rect_rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 89.9999 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HealthUI:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 89.722, 99.1168 ), Vector2( 89.722, 146.129 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StaminaUI:rect_rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 89.9999 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("StaminaUI:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 95.633, 133.353 ), Vector2( 121.428, 154.399 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ManaUI:rect_rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 89.9999 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ManaUI:rect_position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 95.633, 167.814 ), Vector2( 151.699, 159.396 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("ManaUI/ManaStat:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -89.9999 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("ManaUI/ManaStat:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 102.995, 45.0779 ), Vector2( 92.5911, 49.8484 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("StaminaUI/StaminaStat:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 101.714, 49.7112 ), Vector2( 101.714, 49.7112 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("StaminaUI/StaminaStat:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -89.9999 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("HealthUI/HealthStat:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 114.08, 42.2504 ), Vector2( 112.606, 48.9891 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("HealthUI/HealthStat:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -89.9999 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Orbs:rotation_degrees")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 89.9999 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Orbs:position")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 79.7093, 156.794 ), Vector2( 79.7093, 156.794 ) ]
+}
+tracks/14/type = "audio"
+tracks/14/path = NodePath("Sounds/BarAnim")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 32 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[node name="GUI" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 1218.95, 475.842, 1079.95, 1154.21, 1074.13, 217.676 ],
+"_edit_vertical_guides_": [ 1371.24, 224.802, 236.361, 145.529, 11.8246, 1934.22 ]
+}
+
+[node name="Orbs" type="Node2D" parent="."]
+position = Vector2( 79.7093, 156.794 )
+rotation = 1.57079
+
+[node name="Orb2" type="Sprite" parent="Orbs"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 19.9237, 4.20923 )
+rotation = 2.09439
+scale = Vector2( 0.0785427, 0.0785427 )
+texture = ExtResource( 9 )
+
+[node name="Orb" type="Sprite" parent="Orbs"]
+modulate = Color( 0, 0, 0, 1 )
+scale = Vector2( 0.124802, 0.124802 )
+texture = ExtResource( 4 )
+
+[node name="Orb3" type="Sprite" parent="Orbs"]
+self_modulate = Color( 1, 1, 1, 0.52549 )
+position = Vector2( 4.76221, 0 )
+rotation = 0.523598
+scale = Vector2( 0.0444454, 0.0444454 )
+texture = ExtResource( 25 )
+
+[node name="LivingUI" type="Control" parent="."]
+visible = false
+margin_left = 57.1761
+margin_top = 145.823
+margin_right = 97.1761
+margin_bottom = 185.823
+rect_rotation = 89.9999
+rect_scale = Vector2( 0.5, -0.5 )
+script = ExtResource( 6 )
+
+[node name="LivingBackground" type="TextureRect" parent="LivingUI"]
+margin_left = 3.0
+margin_top = -20.2474
+margin_right = 2020.0
+margin_bottom = 105.753
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 2
+
+[node name="LivingFill" type="TextureRect" parent="LivingUI"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -39.0
+margin_right = 871.0
+margin_bottom = 86.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Livingcontour" type="TextureRect" parent="LivingUI"]
+margin_left = 1.0
+margin_top = -21.0
+margin_right = 1984.0
+margin_bottom = 108.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 2
+
+[node name="LivingEnd" type="Sprite" parent="LivingUI"]
+position = Vector2( 554, 46 )
+texture = ExtResource( 2 )
+
+[node name="LivingStat" type="Sprite" parent="LivingUI"]
+position = Vector2( 118.898, 46.578 )
+rotation = 1.57079
+scale = Vector2( 0.988, -0.988 )
+texture = ExtResource( 29 )
+
+[node name="HealthUI" type="Control" parent="."]
+margin_left = 89.722
+margin_top = 146.129
+margin_right = 129.723
+margin_bottom = 186.129
+rect_rotation = 89.9999
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+
+[node name="HealthBackground" type="TextureRect" parent="HealthUI"]
+margin_left = 3.0
+margin_top = -16.0
+margin_right = 2020.0
+margin_bottom = 110.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 2
+
+[node name="HealthFill" type="TextureRect" parent="HealthUI"]
+margin_left = 3.0
+margin_top = -16.0
+margin_right = 856.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="Healthcontour" type="TextureRect" parent="HealthUI"]
+material = SubResource( 911 )
+margin_left = 3.0
+margin_top = -18.0
+margin_right = 2020.0
+margin_bottom = 108.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 2
+
+[node name="HealthEnd" type="Sprite" parent="HealthUI"]
+position = Vector2( 475.403, 49 )
+texture = ExtResource( 2 )
+
+[node name="HealthStat" type="Sprite" parent="HealthUI"]
+position = Vector2( 112.606, 48.9891 )
+rotation = -1.57079
+scale = Vector2( 0.98839, 0.98839 )
+texture = ExtResource( 19 )
+
+[node name="StaminaUI" type="Control" parent="."]
+margin_left = 121.428
+margin_top = 154.399
+margin_right = 161.428
+margin_bottom = 194.399
+rect_rotation = 89.9999
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 7 )
+
+[node name="StaminaBackground" type="TextureRect" parent="StaminaUI"]
+margin_left = 3.0
+margin_top = -16.0
+margin_right = 2020.0
+margin_bottom = 110.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 2
+
+[node name="StaminaFill" type="TextureRect" parent="StaminaUI"]
+margin_left = 3.0
+margin_top = -16.0
+margin_right = 853.0
+margin_bottom = 114.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 2
+
+[node name="Staminacontour" type="TextureRect" parent="StaminaUI"]
+margin_left = 3.0
+margin_top = -18.0
+margin_right = 1988.0
+margin_bottom = 110.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 2
+
+[node name="StaminaEnd" type="Sprite" parent="StaminaUI"]
+position = Vector2( 475.403, 49 )
+texture = ExtResource( 2 )
+
+[node name="StaminaStat" type="Sprite" parent="StaminaUI"]
+position = Vector2( 101.714, 49.7112 )
+rotation = -1.57079
+scale = Vector2( 0.988, 0.988 )
+texture = ExtResource( 28 )
+
+[node name="ManaUI" type="Control" parent="."]
+margin_left = 151.699
+margin_top = 159.396
+margin_right = 191.699
+margin_bottom = 199.396
+rect_rotation = 89.9999
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 24 )
+
+[node name="ManaBackground" type="TextureRect" parent="ManaUI"]
+margin_left = -7.48564
+margin_top = -16.0
+margin_right = 2009.51
+margin_bottom = 110.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 2
+
+[node name="ManaFill" type="TextureRect" parent="ManaUI"]
+margin_left = -7.48564
+margin_top = -16.0
+margin_right = 842.514
+margin_bottom = 114.0
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 2
+
+[node name="Manacontour" type="TextureRect" parent="ManaUI"]
+margin_left = -7.48564
+margin_top = -18.0
+margin_right = 1977.51
+margin_bottom = 110.0
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 2
+
+[node name="ManaEnd" type="Sprite" parent="ManaUI"]
+position = Vector2( 475.403, 49 )
+texture = ExtResource( 2 )
+
+[node name="ManaStat" type="Sprite" parent="ManaUI"]
+position = Vector2( 92.5911, 49.8484 )
+rotation = -1.57079
+scale = Vector2( 0.988, 0.988 )
+texture = ExtResource( 27 )
+
+[node name="ArmorStatUI" type="Control" parent="."]
+visible = false
+margin_left = 3.37323
+margin_top = 95.6733
+margin_right = 3.37323
+margin_bottom = 95.6733
+script = ExtResource( 21 )
+
+[node name="ArmorBackground" type="TextureRect" parent="ArmorStatUI"]
+margin_left = 134.0
+margin_top = 116.0
+margin_right = 1134.0
+margin_bottom = 177.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 2
+
+[node name="Armor" type="TextureRect" parent="ArmorStatUI"]
+margin_left = 134.0
+margin_top = 116.0
+margin_right = 1134.0
+margin_bottom = 177.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 2
+
+[node name="StrengthUI" type="Control" parent="."]
+visible = false
+margin_left = 3.37323
+margin_top = 95.6733
+margin_right = 3.37323
+margin_bottom = 95.6733
+script = ExtResource( 23 )
+
+[node name="StrengthBackground" type="TextureRect" parent="StrengthUI"]
+margin_left = 134.0
+margin_top = 233.0
+margin_right = 454.0
+margin_bottom = 297.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 2
+
+[node name="Strength" type="TextureRect" parent="StrengthUI"]
+visible = false
+margin_left = 134.0
+margin_top = 233.0
+margin_right = 454.0
+margin_bottom = 297.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 2
+
+[node name="ArrowsUI" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 17 )
+
+[node name="ArrowFirst" type="Node2D" parent="ArrowsUI"]
+
+[node name="Frame" type="Sprite" parent="ArrowsUI/ArrowFirst"]
+position = Vector2( 319.007, 1040.29 )
+scale = Vector2( 0.3, 0.4 )
+texture = ExtResource( 14 )
+
+[node name="Arrow" type="Sprite" parent="ArrowsUI/ArrowFirst"]
+position = Vector2( 321.093, 1041.39 )
+rotation = -1.0472
+scale = Vector2( 4, 4.28649 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="ArrowsUI/ArrowFirst"]
+margin_left = 333.102
+margin_top = 1053.04
+margin_right = 365.102
+margin_bottom = 1121.04
+rect_scale = Vector2( 0.3, 0.3 )
+theme = SubResource( 914 )
+text = "1"
+align = 2
+
+[node name="X" type="Label" parent="ArrowsUI/ArrowFirst"]
+margin_left = 350.771
+margin_top = 1055.57
+margin_right = 548.771
+margin_bottom = 1175.57
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 1237 )
+text = "x"
+valign = 1
+
+[node name="FirstArrowNumber" type="Label" parent="ArrowsUI/ArrowFirst"]
+margin_left = 370.529
+margin_top = 1047.29
+margin_right = 568.529
+margin_bottom = 1167.29
+rect_scale = Vector2( 0.3, 0.3 )
+theme = SubResource( 1237 )
+text = "0"
+valign = 1
+
+[node name="ArrowGUIAnim" type="AnimationPlayer" parent="ArrowsUI"]
+reset_on_save = false
+anims/Hidden = SubResource( 916 )
+anims/Visible = SubResource( 915 )
+
+[node name="FrameSecondary" type="Sprite" parent="."]
+position = Vector2( 111.825, 979.94 )
+z_index = 1
+texture = ExtResource( 14 )
+
+[node name="Weapons" type="Node2D" parent="FrameSecondary"]
+
+[node name="Weapon" type="Sprite" parent="FrameSecondary/Weapons"]
+texture = ExtResource( 18 )
+
+[node name="EquipAnimSecondary" type="AnimationPlayer" parent="FrameSecondary"]
+reset_on_save = false
+method_call_mode = 1
+anims/None = SubResource( 913 )
+anims/Weapon = SubResource( 599 )
+
+[node name="Label2" type="Label" parent="FrameSecondary"]
+margin_left = -76.7502
+margin_top = -83.1161
+margin_right = -36.7502
+margin_bottom = -15.1161
+theme = SubResource( 603 )
+text = "2"
+
+[node name="FramePrimary" type="Sprite" parent="."]
+position = Vector2( 246.861, 1027.87 )
+rotation = 0.349066
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 14 )
+
+[node name="Weapons" type="Node2D" parent="FramePrimary"]
+
+[node name="Weapon" type="Sprite" parent="FramePrimary/Weapons"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 18 )
+
+[node name="EquipAnimPrimary" type="AnimationPlayer" parent="FramePrimary"]
+reset_on_save = false
+method_call_mode = 1
+anims/None = SubResource( 912 )
+anims/Weapon = SubResource( 910 )
+
+[node name="Label" type="Label" parent="FramePrimary"]
+margin_left = -75.3815
+margin_top = -85.0447
+margin_right = -35.3815
+margin_bottom = -17.0447
+theme = SubResource( 603 )
+text = "1"
+
+[node name="Weapons" type="Control" parent="."]
+margin_left = -18.3848
+margin_right = 21.6152
+margin_bottom = 40.0
+
+[node name="Shields" type="Control" parent="."]
+margin_left = -22.3452
+margin_top = 30.6733
+margin_right = 17.6548
+margin_bottom = 70.6733
+
+[node name="Gold" type="Label" parent="."]
+margin_left = 1423.66
+margin_top = 9.0
+margin_right = 1671.66
+margin_bottom = 130.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 79 )
+text = "GOLD"
+
+[node name="CoinNumber" type="Label" parent="."]
+margin_left = 1423.73
+margin_top = 30.6585
+margin_right = 1810.73
+margin_bottom = 151.658
+rect_scale = Vector2( 0.25, 0.25 )
+theme = SubResource( 78 )
+text = "0"
+script = ExtResource( 31 )
+
+[node name="GUIAnim" type="AnimationPlayer" parent="."]
+autoplay = "ChangeToPrimary"
+reset_on_save = false
+anims/ChangeToPrimary = SubResource( 81 )
+anims/ChangeToSecondary = SubResource( 84 )
+
+[node name="ElementDamage" type="Node2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.0392157 )
+z_index = 2
+
+[node name="Dread" type="ColorRect" parent="ElementDamage"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -18.0
+margin_top = -17.989
+margin_right = 1935.0
+margin_bottom = 1238.01
+color = Color( 0.568627, 0, 1, 1 )
+
+[node name="DreadAnim" type="AnimationPlayer" parent="ElementDamage/Dread"]
+root_node = NodePath("../..")
+reset_on_save = false
+anims/Dread = SubResource( 587 )
+anims/DreadOff = SubResource( 588 )
+anims/RESET = SubResource( 589 )
+
+[node name="Fire" type="ColorRect" parent="ElementDamage"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = -18.0
+margin_top = -17.989
+margin_right = 1935.0
+margin_bottom = 1238.01
+color = Color( 0.94902, 0.4, 0.0392157, 1 )
+
+[node name="FireAnim" type="AnimationPlayer" parent="ElementDamage/Fire"]
+root_node = NodePath("../..")
+reset_on_save = false
+anims/Fire = SubResource( 590 )
+anims/FireOff = SubResource( 591 )
+anims/RESET = SubResource( 592 )
+
+[node name="DebugStats" type="Node2D" parent="."]
+position = Vector2( 0, 109.617 )
+
+[node name="TEMP" type="Label" parent="DebugStats"]
+margin_left = 145.529
+margin_top = 150.673
+margin_right = 541.529
+margin_bottom = 271.673
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 86 )
+text = "TEMP"
+
+[node name="TempNumber" type="Label" parent="DebugStats"]
+margin_left = 236.114
+margin_top = 150.523
+margin_right = 613.114
+margin_bottom = 271.523
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 595 )
+
+[node name="DREAD" type="Label" parent="DebugStats"]
+margin_left = 145.529
+margin_top = 181.673
+margin_right = 542.529
+margin_bottom = 302.673
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 586 )
+text = "DREAD"
+
+[node name="DreadNumber" type="Label" parent="DebugStats"]
+margin_left = 236.135
+margin_top = 181.987
+margin_right = 613.135
+margin_bottom = 302.987
+rect_scale = Vector2( 0.2, 0.2 )
+theme = SubResource( 596 )
+
+[node name="BarsAnim" type="AnimationPlayer" parent="."]
+anims/Off = SubResource( 1240 )
+anims/On = SubResource( 1239 )
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="BarAnim" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 35 )
+volume_db = -5.0
+bus = "SFX"

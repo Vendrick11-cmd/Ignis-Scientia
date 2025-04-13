@@ -1,0 +1,2704 @@
+[gd_scene load_steps=55 format=2]
+
+[ext_resource path="res://Misc/Black.jpg" type="Texture" id=1]
+[ext_resource path="res://Misc/Tutorials/BasicMovement.png" type="Texture" id=2]
+[ext_resource path="res://Levels/Menu/Button.theme" type="Theme" id=3]
+[ext_resource path="res://Misc/Keys/A.png" type="Texture" id=4]
+[ext_resource path="res://Misc/Keys/D.png" type="Texture" id=5]
+[ext_resource path="res://Misc/Keys/Space.png" type="Texture" id=6]
+[ext_resource path="res://Shaders/Light1.png" type="Texture" id=7]
+[ext_resource path="res://Misc/Tutorials.gd" type="Script" id=8]
+[ext_resource path="res://Misc/Keys/E.png" type="Texture" id=9]
+[ext_resource path="res://Misc/Tutorials/Interacting.png" type="Texture" id=10]
+[ext_resource path="res://Misc/Tutorials/WallJumping.png" type="Texture" id=11]
+[ext_resource path="res://Misc/Keys/LMouse.png" type="Texture" id=12]
+[ext_resource path="res://Misc/Keys/RMouse.png" type="Texture" id=13]
+[ext_resource path="res://Misc/Tutorials/Attacking.png" type="Texture" id=14]
+[ext_resource path="res://Misc/Tutorials/Harvest.png" type="Texture" id=15]
+[ext_resource path="res://Misc/Tutorials/AirAttack.png" type="Texture" id=16]
+[ext_resource path="res://Misc/Keys/Shift.png" type="Texture" id=17]
+[ext_resource path="res://Misc/Tutorials/Dodge.png" type="Texture" id=18]
+[ext_resource path="res://Misc/Keys/Alt.png" type="Texture" id=19]
+[ext_resource path="res://Misc/Tutorials/SlamAttack.png" type="Texture" id=20]
+[ext_resource path="res://Misc/Keys/S.png" type="Texture" id=21]
+[ext_resource path="res://Misc/Keys/Plus.png" type="Texture" id=22]
+[ext_resource path="res://Misc/Tutorials/GrowingPlants.png" type="Texture" id=23]
+[ext_resource path="res://Misc/Tutorials/Alchemy.png" type="Texture" id=24]
+[ext_resource path="res://Misc/Tutorials/Inventory.png" type="Texture" id=25]
+[ext_resource path="res://Misc/Keys/I.png" type="Texture" id=26]
+[ext_resource path="res://Misc/Keys/Tab.png" type="Texture" id=27]
+[ext_resource path="res://Misc/Tutorials/SkillPoints.png" type="Texture" id=28]
+[ext_resource path="res://Misc/Tutorials/Dread.png" type="Texture" id=29]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/alagard.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+outline_size = 2
+outline_color = Color( 0.196078, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+Button/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+Button/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckButton/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+CheckButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+OptionButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.235294, 0.227451, 0.227451, 0.988235 )
+OptionButton/colors/font_color_focus = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_hover = Color( 0.592157, 0.211765, 0.211765, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.619608, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+
+[sub_resource type="Animation" id=867]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=868]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=870]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=869]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=871]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=872]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=873]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=874]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=875]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=876]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=877]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="Animation" id=882]
+resource_name = "Start"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Instruction:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Ribbon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Resume:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Resume:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_animstart"
+} ]
+}
+
+[sub_resource type="DynamicFontData" id=862]
+font_path = "res://Fonts/JenrivTitlingRegular-x3RKV.otf"
+
+[sub_resource type="DynamicFont" id=863]
+size = 50
+outline_size = 1
+outline_color = Color( 0, 1, 0.764706, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 862 )
+
+[sub_resource type="Theme" id=864]
+default_font = SubResource( 863 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_disabled = Color( 0.203922, 0.203922, 0.203922, 0.2 )
+Button/colors/font_color_focus = Color( 0.501961, 0.196078, 0.196078, 1 )
+Button/colors/font_color_hover = Color( 0.501961, 0.196078, 0.196078, 1 )
+Button/colors/font_color_pressed = Color( 0.431373, 0.00392157, 0.00392157, 1 )
+
+[sub_resource type="Animation" id=865]
+resource_name = "Hover"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.262745, 0.827451, 1, 0.196078 ), Color( 0.262745, 0.827451, 1, 0.784314 ) ]
+}
+
+[sub_resource type="Animation" id=866]
+resource_name = "Inactive"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFontData" id=878]
+font_path = "res://Fonts/JenrivTitlingRegular-x3RKV.otf"
+
+[sub_resource type="DynamicFont" id=879]
+size = 46
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 878 )
+
+[sub_resource type="Theme" id=880]
+default_font = SubResource( 879 )
+
+[sub_resource type="Animation" id=881]
+resource_name = "Idle"
+length = 999999.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( -0.5, 0 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Tutorials" type="CanvasLayer"]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 501.683, 372.028, 615.682, 716.323 ],
+"_edit_vertical_guides_": [ 280.0, 520.28 ]
+}
+
+[node name="MoveBasic" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="MoveBasic"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="MoveBasic"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveBasic"]
+anims/Start = SubResource( 1 )
+
+[node name="Instruction" type="Node2D" parent="MoveBasic"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="MoveBasic/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "A journey begins with a single step.
+Hold [color=#00FFFF] A [/color] or [color=#00FFFF] D [/color] to move Hemwick forward or back. "
+text = "A journey begins with a single step.
+Hold  A  or  D  to move Hemwick forward or back. "
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="MoveBasic/Instruction"]
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Press [color=#00FFFF] Space [/color] to leap over obstacles. Tread carefully, the path ahead is unforgiving."
+text = "Press  Space  to leap over obstacles. Tread carefully, the path ahead is unforgiving."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="MoveBasic/Instruction"]
+
+[node name="Up" type="Sprite" parent="MoveBasic/Instruction/Keys"]
+position = Vector2( 280, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="MoveBasic/Instruction/Keys/Up"]
+margin_left = -179.299
+margin_top = 90.5017
+margin_right = 196.701
+margin_bottom = 234.502
+theme = ExtResource( 3 )
+text = "Jump"
+align = 1
+
+[node name="Left" type="Sprite" parent="MoveBasic/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="MoveBasic/Instruction/Keys/Left"]
+margin_left = -275.0
+margin_top = 85.0
+margin_right = 285.0
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Move left"
+align = 1
+
+[node name="Right" type="Sprite" parent="MoveBasic/Instruction/Keys"]
+position = Vector2( 249.058, 613.054 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="MoveBasic/Instruction/Keys/Right"]
+margin_left = 586.0
+margin_top = -163.0
+margin_right = 1234.0
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Move right"
+align = 1
+
+[node name="Interact" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Interact"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Interact"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interact"]
+anims/Start = SubResource( 867 )
+
+[node name="Instruction" type="Node2D" parent="Interact"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Interact/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The world whispers to those who listen. Press [color=#00FFFF] E [/color] to interact with objects, speak with others, or uncover hidden secrets."
+text = "The world whispers to those who listen. Press  E  to interact with objects, speak with others, or uncover hidden secrets."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Interact/Instruction"]
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Not all is as it seems. Reach out. Touch, speak, or reveal what lies beneath the surface."
+text = "Not all is as it seems. Reach out. Touch, speak, or reveal what lies beneath the surface."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Interact/Instruction"]
+
+[node name="Interact" type="Sprite" parent="Interact/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Interact/Instruction/Keys/Interact"]
+margin_left = -275.0
+margin_top = 85.0
+margin_right = 285.0
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Interact"
+align = 1
+
+[node name="WallJumping" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="WallJumping"]
+modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="WallJumping"]
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WallJumping"]
+anims/Start = SubResource( 868 )
+
+[node name="Instruction" type="Node2D" parent="WallJumping"]
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="WallJumping/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The world is not just what lies ahead - it is also what towers above. Leap toward a wall and press [color=#00FFFF] Space [/color] again to ascend beyond limits."
+text = "The world is not just what lies ahead - it is also what towers above. Leap toward a wall and press  Space  again to ascend beyond limits."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="WallJumping/Instruction"]
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Walls are but fleeting obstacles. Move with [color=#00FFFF] A [/color] or [color=#00FFFF] D [/color] to let go and fall freely."
+text = "Walls are but fleeting obstacles. Move with  A  or  D  to let go and fall freely."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="WallJumping/Instruction"]
+
+[node name="Jump" type="Sprite" parent="WallJumping/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="WallJumping/Instruction/Keys/Jump"]
+margin_left = -275.0
+margin_top = 85.0
+margin_right = 285.0
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Jump"
+align = 1
+
+[node name="Left" type="Sprite" parent="WallJumping/Instruction/Keys"]
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="WallJumping/Instruction/Keys/Left"]
+margin_left = -275.0
+margin_top = 85.0
+margin_right = 285.0
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Free"
+align = 1
+
+[node name="Right" type="Sprite" parent="WallJumping/Instruction/Keys"]
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="WallJumping/Instruction/Keys/Right"]
+margin_left = 586.0
+margin_top = -163.0
+margin_right = 1234.0
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Free"
+align = 1
+
+[node name="Harvesting" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Harvesting"]
+modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Harvesting"]
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Harvesting"]
+anims/Start = SubResource( 870 )
+
+[node name="Instruction" type="Node2D" parent="Harvesting"]
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Harvesting/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Not all power is won by blade, some is gathered in quiet moments. Approach and interact by pressing [color=#00FFFF] E [/color] to collect what the world offers."
+text = "Not all power is won by blade, some is gathered in quiet moments. Approach and interact by pressing  E  to collect what the world offers."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Harvesting/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "A single strike speaks, but a flurry becomes a language of its own. Press [color=#00FFFF] L Mouse [/color] in rhythm to unleash a chain of swift blows."
+text = "A single strike speaks, but a flurry becomes a language of its own. Press  L Mouse  in rhythm to unleash a chain of swift blows."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Harvesting/Instruction"]
+
+[node name="Action" type="Sprite" parent="Harvesting/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Harvesting/Instruction/Keys/Action"]
+margin_left = -535.707
+margin_top = 85.0
+margin_right = 552.293
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Gather Ingredients"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Harvesting/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Harvesting/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Harvesting/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Harvesting/Instruction/Keys/Left"]
+visible = false
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Repeatedly"
+align = 1
+
+[node name="Right" type="Sprite" parent="Harvesting/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Harvesting/Instruction/Keys/Right"]
+margin_left = 586.0
+margin_top = -163.0
+margin_right = 1234.0
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Free"
+align = 1
+
+[node name="Attack" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Attack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Attack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Attack"]
+anims/Start = SubResource( 869 )
+
+[node name="Instruction" type="Node2D" parent="Attack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Attack/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The world does not wait to be understood – it must be carved, one strike at a time. Press [color=#00FFFF] L Mouse [/color] to strike swiftly, or [color=#00FFFF] R Mouse [/color] to strike true."
+text = "The world does not wait to be understood – it must be carved, one strike at a time. Press  L Mouse  to strike swiftly, or  R Mouse  to strike true."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Attack/Instruction"]
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "A single strike speaks, but a flurry becomes a language of its own. Press [color=#00FFFF] L Mouse [/color] in rhythm to unleash a chain of swift blows."
+text = "A single strike speaks, but a flurry becomes a language of its own. Press  L Mouse  in rhythm to unleash a chain of swift blows."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Attack/Instruction"]
+
+[node name="Action" type="Sprite" parent="Attack/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Attack/Instruction/Keys/Action"]
+margin_left = -350.51
+margin_top = 85.0
+margin_right = 353.49
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Light Attack"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Attack/Instruction/Keys"]
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Attack/Instruction/Keys/Action2"]
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Attack/Instruction/Keys"]
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Attack/Instruction/Keys/Left"]
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Repeatedly"
+align = 1
+
+[node name="Right" type="Sprite" parent="Attack/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Attack/Instruction/Keys/Right"]
+margin_left = 586.0
+margin_top = -163.0
+margin_right = 1234.0
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Free"
+align = 1
+
+[node name="AirAttack" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="AirAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="AirAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AirAttack"]
+reset_on_save = false
+anims/Start = SubResource( 871 )
+
+[node name="Instruction" type="Node2D" parent="AirAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="AirAttack/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The sky is no sanctuary. Strike even as you fall, at the cost of remaining vulnerable. Press [color=#00FFFF] L Mouse [/color] midair to cut through silence and stone alike, but also to gain some air distance."
+text = "The sky is no sanctuary. Strike even as you fall, at the cost of remaining vulnerable. Press  L Mouse  midair to cut through silence and stone alike, but also to gain some air distance."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="AirAttack/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "A single strike speaks, but a flurry becomes a language of its own. Press [color=#00FFFF] L Mouse [/color] in rhythm to unleash a chain of swift blows."
+text = "A single strike speaks, but a flurry becomes a language of its own. Press  L Mouse  in rhythm to unleash a chain of swift blows."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="AirAttack/Instruction"]
+
+[node name="Action" type="Sprite" parent="AirAttack/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="AirAttack/Instruction/Keys/Action"]
+margin_left = -482.575
+margin_top = 85.0
+margin_right = 489.425
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Light Attack
+(while airborne)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="AirAttack/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="AirAttack/Instruction/Keys/Action2"]
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="AirAttack/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="AirAttack/Instruction/Keys/Left"]
+visible = false
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Repeatedly"
+align = 1
+
+[node name="Right" type="Sprite" parent="AirAttack/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="AirAttack/Instruction/Keys/Right"]
+margin_left = 586.0
+margin_top = -163.0
+margin_right = 1234.0
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Free"
+align = 1
+
+[node name="DodgeDash" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="DodgeDash"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="DodgeDash"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DodgeDash"]
+reset_on_save = false
+anims/Start = SubResource( 872 )
+
+[node name="Instruction" type="Node2D" parent="DodgeDash"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="DodgeDash/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Even the grounded may glide through danger. Press [color=#00FFFF] Shift [/color] to roll and let peril pass you by. Grace lies not only in strikes, but escapes as well."
+text = "Even the grounded may glide through danger. Press  Shift  to roll and let peril pass you by. Grace lies not only in strikes, but escapes as well."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="DodgeDash/Instruction"]
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="DodgeDash/Instruction"]
+
+[node name="Action" type="Sprite" parent="DodgeDash/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 17 )
+
+[node name="Label" type="Label" parent="DodgeDash/Instruction/Keys/Action"]
+margin_left = -482.575
+margin_top = 85.0
+margin_right = 489.425
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Dodge"
+align = 1
+
+[node name="Action2" type="Sprite" parent="DodgeDash/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="DodgeDash/Instruction/Keys/Action2"]
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="DodgeDash/Instruction/Keys"]
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="DodgeDash/Instruction/Keys/Left"]
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Dash"
+align = 1
+
+[node name="Right" type="Sprite" parent="DodgeDash/Instruction/Keys"]
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="DodgeDash/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Air Dash
+(while airborne)"
+align = 1
+
+[node name="SlamAttack" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="SlamAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="SlamAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SlamAttack"]
+reset_on_save = false
+anims/Start = SubResource( 873 )
+
+[node name="Instruction" type="Node2D" parent="SlamAttack"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="SlamAttack/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The earth trembles for those who command it. Press [color=#00FFFF] S [/color] and [color=#00FFFF] R Mouse [/color] simultaneously to unleash a vertical crushing blow - nothing stands in the wake of your descent!"
+text = "The earth trembles for those who command it. Press  S  and  R Mouse  simultaneously to unleash a vertical crushing blow - nothing stands in the wake of your descent!"
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="SlamAttack/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="SlamAttack/Instruction"]
+
+[node name="Action" type="Sprite" parent="SlamAttack/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 21 )
+
+[node name="Label" type="Label" parent="SlamAttack/Instruction/Keys/Action"]
+margin_left = -53.9763
+margin_top = 85.0
+margin_right = 918.024
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Slam Attack"
+align = 1
+
+[node name="Action2" type="Sprite" parent="SlamAttack/Instruction/Keys"]
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="SlamAttack/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="SlamAttack/Instruction/Keys"]
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="SlamAttack/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="SlamAttack/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="SlamAttack/Instruction/Keys/Left"]
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Dash"
+align = 1
+
+[node name="Right" type="Sprite" parent="SlamAttack/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="SlamAttack/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Air Dash
+(while airborne)"
+align = 1
+
+[node name="Gardening" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Gardening"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Gardening"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 23 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Gardening"]
+reset_on_save = false
+anims/Start = SubResource( 874 )
+
+[node name="Instruction" type="Node2D" parent="Gardening"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Gardening/Instruction"]
+margin_left = 51.0
+margin_top = 393.311
+margin_right = 1865.0
+margin_bottom = 507.311
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The earth is not barren—it awaits your touch. Equip the hoe and strike the soil to form plots where life may begin. Choose your seeds wisely, for each plant carries its own purpose in the alchemy of nature."
+text = "The earth is not barren—it awaits your touch. Equip the hoe and strike the soil to form plots where life may begin. Choose your seeds wisely, for each plant carries its own purpose in the alchemy of nature."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Gardening/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Gardening/Instruction"]
+
+[node name="Action" type="Sprite" parent="Gardening/Instruction/Keys"]
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Gardening/Instruction/Keys/Action"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 759.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Create Plots
+(in designated areas only)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Gardening/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Gardening/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="Gardening/Instruction/Keys"]
+visible = false
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="Gardening/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Gardening/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="Gardening/Instruction/Keys/Left"]
+margin_left = -308.791
+margin_top = 85.0
+margin_right = 310.209
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Dash"
+align = 1
+
+[node name="Right" type="Sprite" parent="Gardening/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Gardening/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Air Dash
+(while airborne)"
+align = 1
+
+[node name="Alchemy" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Alchemy"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Alchemy"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Alchemy"]
+reset_on_save = false
+anims/Start = SubResource( 875 )
+
+[node name="Instruction" type="Node2D" parent="Alchemy"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Alchemy/Instruction"]
+margin_left = 51.0
+margin_top = 393.0
+margin_right = 1865.0
+margin_bottom = 753.0
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Approach the cauldron and let the craft unfold. In the Ingredients tab, you will combine plants or other ingredients you have gathered to create various potions. 
+
+The other tabs reveal the recipes known to you, belonging to each category. 
+Potions help you and most of the time enhance your constitution. 
+Poisons are crafted tinctures for coating your weapons.
+The Antidotes tab shows you the recipes for  remedies to cure your afflictions..
+
+Remember, knowledge is but a guide. Recipes are not the only path. Experiment freely, for the unknown may reveal power in unexpected forms!"
+text = "Approach the cauldron and let the craft unfold. In the Ingredients tab, you will combine plants or other ingredients you have gathered to create various potions. 
+
+The other tabs reveal the recipes known to you, belonging to each category. 
+Potions help you and most of the time enhance your constitution. 
+Poisons are crafted tinctures for coating your weapons.
+The Antidotes tab shows you the recipes for  remedies to cure your afflictions..
+
+Remember, knowledge is but a guide. Recipes are not the only path. Experiment freely, for the unknown may reveal power in unexpected forms!"
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Alchemy/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Alchemy/Instruction"]
+
+[node name="Action" type="Sprite" parent="Alchemy/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Alchemy/Instruction/Keys/Action"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 759.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Create Plots
+(in designated areas only)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Alchemy/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Alchemy/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="Alchemy/Instruction/Keys"]
+visible = false
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="Alchemy/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Alchemy/Instruction/Keys"]
+position = Vector2( 279.058, 781.944 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Alchemy/Instruction/Keys/Left"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 782.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Interact with the cauldron"
+align = 1
+
+[node name="Right" type="Sprite" parent="Alchemy/Instruction/Keys"]
+visible = false
+position = Vector2( 249.058, 856.998 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 19 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Alchemy/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Air Dash
+(while airborne)"
+align = 1
+
+[node name="Inventory" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Inventory"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Inventory"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 25 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Inventory"]
+reset_on_save = false
+anims/Start = SubResource( 876 )
+
+[node name="Instruction" type="Node2D" parent="Inventory"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Inventory/Instruction"]
+margin_left = 51.0
+margin_top = 393.0
+margin_right = 1865.0
+margin_bottom = 882.0
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The inventory holds the fruits of your journey.
+In the Ingredients tab, gather all you’ve collected - plants, herbs, and remnants of the land, waiting to be woven into potions. 
+
+In the Potions tab, you will find the elixirs you’ve crafted, ready to restore or enhance. 
+
+The Quest Items tab holds what is vital - those treasures and relics that carry the weight of your adventure. 
+
+And in Victuals, sustenance lies in wait - bread, wine, and other consumables to replenish and sustain you.
+
+Each tab tells a story, what you carry is as important as what you leave behind."
+text = "The inventory holds the fruits of your journey.
+In the Ingredients tab, gather all you’ve collected - plants, herbs, and remnants of the land, waiting to be woven into potions. 
+
+In the Potions tab, you will find the elixirs you’ve crafted, ready to restore or enhance. 
+
+The Quest Items tab holds what is vital - those treasures and relics that carry the weight of your adventure. 
+
+And in Victuals, sustenance lies in wait - bread, wine, and other consumables to replenish and sustain you.
+
+Each tab tells a story, what you carry is as important as what you leave behind."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Inventory/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Inventory/Instruction"]
+
+[node name="Action" type="Sprite" parent="Inventory/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Inventory/Instruction/Keys/Action"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 759.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Create Plots
+(in designated areas only)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Inventory/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Inventory/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="Inventory/Instruction/Keys"]
+visible = false
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="Inventory/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Inventory/Instruction/Keys"]
+position = Vector2( 279.058, 877.795 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 27 )
+
+[node name="Label" type="Label" parent="Inventory/Instruction/Keys/Left"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 782.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Open Character
+ Menu"
+align = 1
+
+[node name="Right" type="Sprite" parent="Inventory/Instruction/Keys"]
+position = Vector2( 364.558, 950.997 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 26 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Inventory/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Open Inventory
+directly"
+align = 1
+
+[node name="SkillPoints" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="SkillPoints"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="SkillPoints"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 28 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SkillPoints"]
+reset_on_save = false
+anims/Start = SubResource( 877 )
+
+[node name="Instruction" type="Node2D" parent="SkillPoints"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="SkillPoints/Instruction"]
+margin_left = 51.0
+margin_top = 393.0
+margin_right = 1865.0
+margin_bottom = 882.0
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Skill points are not merely earned - they are discovered, hidden throughout the world. Approach them with intent, for they are the keys to your growth.
+
+Within the Skill Tree, you will find pathways to improve your strength, agility, and knowledge. Each category holds its own potential, some lead to swift strikes, others to deeper understanding. The world offers these points, but how you use them is yours to decide.
+
+Grow, evolve, and unlock the power within.
+
+The Skill Tree can be accessed via Character Menu Screen."
+text = "Skill points are not merely earned - they are discovered, hidden throughout the world. Approach them with intent, for they are the keys to your growth.
+
+Within the Skill Tree, you will find pathways to improve your strength, agility, and knowledge. Each category holds its own potential, some lead to swift strikes, others to deeper understanding. The world offers these points, but how you use them is yours to decide.
+
+Grow, evolve, and unlock the power within.
+
+The Skill Tree can be accessed via Character Menu Screen."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="SkillPoints/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="SkillPoints/Instruction"]
+
+[node name="Action" type="Sprite" parent="SkillPoints/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="SkillPoints/Instruction/Keys/Action"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 759.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Create Plots
+(in designated areas only)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="SkillPoints/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="SkillPoints/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="SkillPoints/Instruction/Keys"]
+visible = false
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="SkillPoints/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="SkillPoints/Instruction/Keys"]
+position = Vector2( 279.058, 877.795 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 27 )
+
+[node name="Label" type="Label" parent="SkillPoints/Instruction/Keys/Left"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 782.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Open Character
+ Menu"
+align = 1
+
+[node name="Right" type="Sprite" parent="SkillPoints/Instruction/Keys"]
+visible = false
+position = Vector2( 364.558, 950.997 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 26 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="SkillPoints/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Open Inventory
+directly"
+align = 1
+
+[node name="Dread" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="Sprite" parent="Dread"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 961.34, 540.895 )
+scale = Vector2( 6.40893, 6.43923 )
+texture = ExtResource( 1 )
+
+[node name="Ribbon" type="Sprite" parent="Dread"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 966.077, 113.028 )
+texture = ExtResource( 29 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dread"]
+reset_on_save = false
+anims/Start = SubResource( 882 )
+
+[node name="Instruction" type="Node2D" parent="Dread"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -135.972 )
+
+[node name="Label" type="RichTextLabel" parent="Dread/Instruction"]
+margin_left = 51.0
+margin_top = 393.0
+margin_right = 1865.0
+margin_bottom = 882.0
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "The mind is fragile, and the heart may falter. Within the presence of dread, fear grows like a shadow.
+
+When inflicted by the Dread status effect, the air thickens with unease. As you remain within its influence, the dread builds, growing stronger with every passing moment.
+
+When this fear becomes too great, your strength will wane, and your strikes will falter. When the effect is active, you will deal only half of your damage. But fret not, the effect does not last forever. If you can distance yourself from the source of fear, the effect will fade, though slowly, like a storm passing.
+
+Be mindful: some enemies' presence will bring Dread, but you have the power to endure. Escape, or face the fear."
+text = "The mind is fragile, and the heart may falter. Within the presence of dread, fear grows like a shadow.
+
+When inflicted by the Dread status effect, the air thickens with unease. As you remain within its influence, the dread builds, growing stronger with every passing moment.
+
+When this fear becomes too great, your strength will wane, and your strikes will falter. When the effect is active, you will deal only half of your damage. But fret not, the effect does not last forever. If you can distance yourself from the source of fear, the effect will fade, though slowly, like a storm passing.
+
+Be mindful: some enemies' presence will bring Dread, but you have the power to endure. Escape, or face the fear."
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="Dread/Instruction"]
+visible = false
+margin_left = 51.0
+margin_top = 637.654
+margin_right = 1865.0
+margin_bottom = 751.654
+theme = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "When blades are close, be closer still. Tap toward your enemy and press [color=#00FFFF] Alt [/color] to dash, less retreat, more reposition! 
+Press [color=#00FFFF] Alt [/color] midair to summon wings once buried in legend. For a breath, become untouchable."
+text = "When blades are close, be closer still. Tap toward your enemy and press  Alt  to dash, less retreat, more reposition! 
+Press  Alt  midair to summon wings once buried in legend. For a breath, become untouchable."
+scroll_active = false
+
+[node name="Keys" type="Node2D" parent="Dread/Instruction"]
+
+[node name="Action" type="Sprite" parent="Dread/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Dread/Instruction/Keys/Action"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 759.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Create Plots
+(in designated areas only)"
+align = 1
+
+[node name="Action2" type="Sprite" parent="Dread/Instruction/Keys"]
+visible = false
+position = Vector2( 520.343, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="Dread/Instruction/Keys/Action2"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Action3" type="Sprite" parent="Dread/Instruction/Keys"]
+visible = false
+position = Vector2( 398.783, 538 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 22 )
+
+[node name="Label" type="Label" parent="Dread/Instruction/Keys/Action3"]
+visible = false
+margin_left = -372.533
+margin_top = 85.0
+margin_right = 371.467
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Heavy Attack"
+align = 1
+
+[node name="Left" type="Sprite" parent="Dread/Instruction/Keys"]
+visible = false
+position = Vector2( 279.058, 877.795 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 27 )
+
+[node name="Label" type="Label" parent="Dread/Instruction/Keys/Left"]
+margin_left = -760.193
+margin_top = 85.0
+margin_right = 782.807
+margin_bottom = 332.0
+theme = ExtResource( 3 )
+text = "Open Character
+ Menu"
+align = 1
+
+[node name="Right" type="Sprite" parent="Dread/Instruction/Keys"]
+visible = false
+position = Vector2( 364.558, 950.997 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 26 )
+offset = Vector2( 905.893, -247.529 )
+
+[node name="Label" type="Label" parent="Dread/Instruction/Keys/Right"]
+margin_left = 417.917
+margin_top = -163.0
+margin_right = 1389.92
+margin_bottom = 82.0
+theme = ExtResource( 3 )
+text = "Open Inventory
+directly"
+align = 1
+
+[node name="Resume" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 449.419
+margin_top = 407.386
+margin_right = 838.419
+margin_bottom = 513.386
+focus_mode = 0
+theme = SubResource( 864 )
+enabled_focus_mode = 0
+text = "Resume"
+flat = true
+icon_align = 1
+
+[node name="Sprite" type="Sprite" parent="Resume"]
+modulate = Color( 0.262745, 0.827451, 1, 0.196078 )
+show_behind_parent = true
+position = Vector2( 199.785, 45.3511 )
+scale = Vector2( 5.02101, 0.547514 )
+texture = ExtResource( 7 )
+
+[node name="StartAnim" type="AnimationPlayer" parent="Resume"]
+reset_on_save = false
+anims/Hover = SubResource( 865 )
+anims/Inactive = SubResource( 866 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -298.0
+margin_top = -101.703
+margin_right = 298.0
+margin_bottom = -54.7035
+theme = SubResource( 880 )
+text = "Press Space to continue."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+anims/Idle = SubResource( 881 )
+
+[connection signal="animation_finished" from="MoveBasic/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Interact/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="WallJumping/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Harvesting/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Attack/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="AirAttack/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="DodgeDash/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="SlamAttack/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Gardening/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Alchemy/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Inventory/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="SkillPoints/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Dread/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="mouse_entered" from="Resume" to="." method="_on_Resume_mouse_entered"]
+[connection signal="mouse_exited" from="Resume" to="." method="_on_Resume_mouse_exited"]
+[connection signal="pressed" from="Resume" to="." method="_on_Resume_pressed"]

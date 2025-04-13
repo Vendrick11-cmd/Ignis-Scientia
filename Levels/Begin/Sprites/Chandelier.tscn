@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Shaders/Light1.png" type="Texture" id=1]
+[ext_resource path="res://Levels/Level1/Sprites/SimpleCandle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/Begin/Sprites/Chandelier.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=411]
+extents = Vector2( 19.4857, 1.57654 )
+
+[sub_resource type="CanvasItemMaterial" id=412]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=413]
+blend_mode = 1
+
+[node name="Chandelier" type="StaticBody2D"]
+position = Vector2( 0.677856, 0.00875854 )
+collision_layer = 4194304
+collision_mask = 0
+
+[node name="ChandelierSprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="SimpleCandle" parent="ChandelierSprite" instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( 18.4131, 14.056 )
+
+[node name="SimpleCandle2" parent="ChandelierSprite" instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( 9.48633, 18.5872 )
+
+[node name="SimpleCandle3" parent="ChandelierSprite" instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( -8.53223, 17.6007 )
+
+[node name="SimpleCandle4" parent="ChandelierSprite" instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( -17.5923, 15.9178 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.349609, 18.7386 )
+shape = SubResource( 411 )
+
+[node name="Light2D" type="Light2D" parent="."]
+modulate = Color( 1, 0.529412, 0.188235, 0.501961 )
+material = SubResource( 412 )
+position = Vector2( 0.349609, 14.6992 )
+texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 0.996078, 0.529412, 0.176471, 1 )
+energy = 1.2
+shadow_enabled = true
+shadow_gradient_length = 1.0
+shadow_filter = 1
+shadow_filter_smooth = 25.0
+
+[node name="Light2D4" type="Sprite" parent="."]
+modulate = Color( 0.819608, 0.45098, 0.180392, 1 )
+self_modulate = Color( 1, 1, 1, 0.431373 )
+material = SubResource( 413 )
+position = Vector2( 0.349609, 15.1621 )
+scale = Vector2( 1.26875, 1.26875 )
+texture = ExtResource( 1 )
