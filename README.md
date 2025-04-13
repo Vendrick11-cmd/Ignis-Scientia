@@ -3,6 +3,15 @@
 A 2D pixel-art action-adventure game about alchemy, exploration, and ancient knowledge.
 
 You play as Hemwick, a wanderer seeking forgotten wisdom. From crafting powerful potions to battling spectral knights, Ignis Scientia combines combat, puzzle-solving, and a rich world that grows darker with every step.
+
+🎥 Video Presentation
+
+[![Watch on YouTube](https://img.youtube.com/vi/clRXoW4x8QI/0.jpg)](https://www.youtube.com/watch?v=clRXoW4x8QI)  
+→ [Click here to watch the video on YouTube](https://www.youtube.com/watch?v=clRXoW4x8QI)
+
+
+
+
 🎮 Features
 
     ⚔️ Combo-based combat: Light and heavy attacks, dodges, air attacks, and slam moves.
